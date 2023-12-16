@@ -1,0 +1,420 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<c2project>
+    <name>Asteroids Mini Engine</name>
+    <description>bla</description>
+    <version>2.0.0.0</version>
+    <author>Raphaël Jaes</author>
+    <author-email></author-email>
+    <author-website>https://rafosgames.itch.io/</author-website>
+    <app-id>com.rafosgames.asteroids</app-id>
+    <unique-id>269ur8prj6ok4</unique-id>
+    <saved-with-version>22700</saved-with-version>
+    <used-plugins>
+        <plugin author="Scirra" id="Audio" version="1">Audio</plugin>
+        <plugin author="Scirra" id="Browser" version="1">Browser</plugin>
+        <plugin author="Scirra" id="Function" version="1">Function</plugin>
+        <plugin author="Scirra" id="Keyboard" version="1">Keyboard</plugin>
+        <plugin author="Scirra" id="Sprite" version="1">Sprite</plugin>
+        <plugin author="Scirra" id="Text" version="1">Text</plugin>
+        <plugin author="Scirra" id="TiledBg" version="1">Tiled Background</plugin>
+        <plugin author="Scirra" id="Touch" version="1">Touch</plugin>
+    </used-plugins>
+    <used-behaviors>
+        <behavior author="Scirra" id="Bullet" version="1">Bullet</behavior>
+        <behavior author="Scirra" id="Fade" version="1">Fade</behavior>
+        <behavior author="Scirra" id="Flash" version="1">Flash</behavior>
+        <behavior author="Scirra" id="Sin" version="1">Sine</behavior>
+        <behavior author="Scirra" id="custom" version="1">Custom Movement</behavior>
+        <behavior author="Scirra" id="destroy" version="1">Destroy outside layout</behavior>
+        <behavior author="Scirra" id="solid" version="1">Solid</behavior>
+        <behavior author="Scirra" id="wrap" version="1">Wrap</behavior>
+    </used-behaviors>
+    <used-effects />
+    <configurations>
+        <configuration exporter-descname="HTML5" exporter-id="html5" name="HTML5" />
+    </configurations>
+    <window-size>
+        <width>854</width>
+        <height>480</height>
+    </window-size>
+    <pixel-rounding>0</pixel-rounding>
+    <preview-effects>1</preview-effects>
+    <first-layout>TitleScreen</first-layout>
+    <use-loader-layout>0</use-loader-layout>
+    <configuration-settings>
+        <prop name="Clear background">Yes</prop>
+        <prop name="Downscaling">Medium quality</prop>
+        <prop name="Enable WebGL">On</prop>
+        <prop name="Fullscreen in browser">Letterbox scale</prop>
+        <prop name="Fullscreen scaling">High quality</prop>
+        <prop name="Loader style">Progress bar &amp; logo</prop>
+        <prop name="Orientations">Any</prop>
+        <prop name="Pause on unfocus">No</prop>
+        <prop name="Physics engine">Box2D web</prop>
+        <prop name="Preload sounds">Yes</prop>
+        <prop name="Preview browser">(default)</prop>
+        <prop name="Sampling">Linear</prop>
+        <prop name="Use high-DPI display">Yes</prop>
+    </configuration-settings>
+    <object-folder>
+        <object-folder name="Logos">
+            <object-type name="Logo_credits" sid="1225895206355281">
+                <plugin id="Sprite" />
+                <instance-variables>
+                    <instance-variable name="website" sid="4867950671494108" type="string" />
+                    <instance-variable name="nameweb" sid="1743941176986646" type="string" />
+                </instance-variables>
+                <animation-folder>
+                    <animation framecount="3" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="3633324650508586" speed="0">
+                        <frame duration="1" hotspotX="0" hotspotY="0" original-source="C:\Users\Raphaël\Desktop\9eNyqV.png">
+                            <collision-poly>
+                                <point x="0.212329" y="0.0438596" />
+                                <point x="0.787671" y="0.0438596" />
+                                <point x="0.989726" y="0.245614" />
+                                <point x="0.869863" y="0.666667" />
+                                <point x="0.5" y="0.780702" />
+                                <point x="0.0684932" y="0.824561" />
+                                <point x="0.0136986" y="0.245614" />
+                            </collision-poly>
+                        </frame>
+                        <frame duration="1" hotspotX="0" hotspotY="0" original-source="D:\Proyectos personales y  Game design\BlockBreaking Engine C2\chiptone.png" />
+                        <frame duration="1" hotspotX="0" hotspotY="0" original-source="D:\Proyectos personales y  Game design\BlockBreaking Engine C2\Rafos(1).png">
+                            <collision-poly>
+                                <point x="0.00636943" y="0.317365" />
+                                <point x="0.515924" y="0.011976" />
+                                <point x="0.859873" y="0.634731" />
+                                <point x="0.914013" y="0.45509" />
+                                <point x="0.515924" y="0.964072" />
+                                <point x="0.130573" y="0.437126" />
+                            </collision-poly>
+                        </frame>
+                    </animation>
+                </animation-folder>
+            </object-type>
+            <object-type name="Logo_asteroids" sid="6315124691786227">
+                <plugin id="Sprite" />
+                <behaviors>
+                    <behavior-type name="SineSize" sid="9998512653223212">
+                        <behavior id="Sin" />
+                    </behavior-type>
+                    <behavior-type name="SineAngle" sid="5227748218590739">
+                        <behavior id="Sin" />
+                    </behavior-type>
+                </behaviors>
+                <animation-folder>
+                    <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="6389596138029149" speed="5">
+                        <frame duration="1" hotspotX="0.501629" hotspotY="0.50237" original-source="C:\Users\Raphaël\Downloads\Asteroids(3).png">
+                            <collision-poly>
+                                <point x="0" y="0" />
+                                <point x="1" y="1" />
+                                <point x="0" y="1" />
+                            </collision-poly>
+                        </frame>
+                    </animation>
+                </animation-folder>
+            </object-type>
+        </object-folder>
+        <object-folder name="Plugins">
+            <object-type name="Audio" sid="6615451631499523">
+                <plugin id="Audio" />
+            </object-type>
+            <object-type name="Browser" sid="8348310787774">
+                <plugin id="Browser" />
+            </object-type>
+            <object-type name="Function" sid="3292136991471722">
+                <plugin id="Function" />
+            </object-type>
+            <object-type name="Keyboard" sid="9031854017513989">
+                <plugin id="Keyboard" />
+            </object-type>
+            <object-type name="Touch" sid="8134966877812512">
+                <plugin id="Touch" />
+            </object-type>
+        </object-folder>
+        <object-folder name="Objects">
+            <object-type name="obj_bluebutton" sid="951276043706289">
+                <plugin id="Sprite" />
+                <instance-variables>
+                    <instance-variable name="NextLay" sid="1206884842529747" type="string" />
+                </instance-variables>
+                <animation-folder>
+                    <animation framecount="2" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="7268539773998929" speed="0">
+                        <frame duration="1" hotspotX="0" hotspotY="0" original-source="D:\Proyectos personales y  Game design\Elementos gratuitos - Assets - Iconos - musica\ASSETS PARA ALFAS DE JUEGOS O PROTOTIPOS\UI pack\PNG\blue_button00.png">
+                            <collision-poly>
+                                <point x="0.00526316" y="0.0204082" />
+                                <point x="0.5" y="0" />
+                                <point x="0.994737" y="0.0204082" />
+                                <point x="0.994737" y="0.979592" />
+                                <point x="0.5" y="1" />
+                                <point x="0.00526316" y="0.979592" />
+                            </collision-poly>
+                        </frame>
+                        <frame duration="1" hotspotX="0" hotspotY="0" original-source="D:\Proyectos personales y  Game design\Elementos gratuitos - Assets - Iconos - musica\ASSETS PARA ALFAS DE JUEGOS O PROTOTIPOS\UI pack\PNG\grey_button01.png">
+                            <collision-poly>
+                                <point x="0.00526316" y="0.0204082" />
+                                <point x="0.5" y="0" />
+                                <point x="0.994737" y="0.0204082" />
+                                <point x="0.994737" y="0.979592" />
+                                <point x="0.5" y="1" />
+                                <point x="0.00526316" y="0.979592" />
+                            </collision-poly>
+                        </frame>
+                    </animation>
+                </animation-folder>
+            </object-type>
+            <object-type name="obj_bullet" sid="8878393108130577">
+                <plugin id="Sprite" />
+                <behaviors>
+                    <behavior-type name="Bullet" sid="7616376939145488">
+                        <behavior id="Bullet" />
+                    </behavior-type>
+                    <behavior-type name="DestroyOutsideLayout" sid="9136887318733747">
+                        <behavior id="destroy" />
+                    </behavior-type>
+                </behaviors>
+                <animation-folder>
+                    <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="8569025228043815" speed="5">
+                        <frame duration="1" hotspotX="0.486486" hotspotY="0.538462" original-source="D:\Proyectos personales\ASSETS PARA ALFAS DE JUEGOS O PROTOTIPOS\Space Shooter\PNG\Lasers\laserBlue06.png" />
+                    </animation>
+                </animation-folder>
+            </object-type>
+            <object-type name="obj_fire" sid="4755043684834191">
+                <plugin id="Sprite" />
+                <behaviors>
+                    <behavior-type name="Fade" sid="65472823672356">
+                        <behavior id="Fade" />
+                    </behavior-type>
+                </behaviors>
+                <animation-folder>
+                    <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="712513156492394" speed="5">
+                        <frame duration="1" hotspotX="1" hotspotY="0.5" original-source="D:\Proyectos personales y  Game design\Elementos gratuitos - Assets - Iconos - musica\ASSETS PARA ALFAS DE JUEGOS O PROTOTIPOS\Space Shooter\PNG\Effects\fire10.png">
+                            <collision-poly>
+                                <point x="0.846154" y="1" />
+                                <point x="0.538462" y="1" />
+                                <point x="0.153846" y="1" />
+                                <point x="0" y="0.527028" />
+                                <point x="0.307692" y="0" />
+                                <point x="0.538462" y="0" />
+                                <point x="0.692308" y="0" />
+                                <point x="1" y="0.527028" />
+                            </collision-poly>
+                        </frame>
+                    </animation>
+                </animation-folder>
+            </object-type>
+            <object-type name="obj_asteroid" sid="9683965957903818">
+                <plugin id="Sprite" />
+                <behaviors>
+                    <behavior-type name="Wrap" sid="1194994259574726">
+                        <behavior id="wrap" />
+                    </behavior-type>
+                    <behavior-type name="Bullet" sid="800939767366947">
+                        <behavior id="Bullet" />
+                    </behavior-type>
+                </behaviors>
+                <animation-folder>
+                    <animation framecount="4" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="5169306987335251" speed="0">
+                        <frame duration="1" hotspotX="0.504951" hotspotY="0.5" original-source="D:\Proyectos personales\ASSETS PARA ALFAS DE JUEGOS O PROTOTIPOS\Space Shooter\PNG\Meteors\meteorGrey_big1.png">
+                            <collision-poly>
+                                <point x="0.168317" y="0" />
+                                <point x="0.720298" y="0" />
+                                <point x="0.990099" y="0.5" />
+                                <point x="0.841584" y="0.883928" />
+                                <point x="0.596536" y="0.833333" />
+                                <point x="0.289604" y="0.985119" />
+                                <point x="0" y="0.622024" />
+                            </collision-poly>
+                        </frame>
+                        <frame duration="1" hotspotX="0.511111" hotspotY="0.5" original-source="D:\Proyectos personales\ASSETS PARA ALFAS DE JUEGOS O PROTOTIPOS\Space Shooter\PNG\Meteors\meteorGrey_med2.png">
+                            <collision-poly>
+                                <point x="0.155555" y="0.1125" />
+                                <point x="0.711111" y="0.034375" />
+                                <point x="1" y="0.440625" />
+                                <point x="0.658333" y="1" />
+                                <point x="0.322222" y="0.9625" />
+                                <point x="0" y="0.61875" />
+                            </collision-poly>
+                        </frame>
+                        <frame duration="1" hotspotX="0.517241" hotspotY="0.5" original-source="D:\Proyectos personales\ASSETS PARA ALFAS DE JUEGOS O PROTOTIPOS\Space Shooter\PNG\Meteors\meteorGrey_small2.png">
+                            <collision-poly>
+                                <point x="0.137931" y="0.139423" />
+                                <point x="0.693966" y="0.0480769" />
+                                <point x="0.982759" y="0.442308" />
+                                <point x="0.646552" y="1" />
+                                <point x="0.293104" y="0.947115" />
+                                <point x="0" y="0.615385" />
+                            </collision-poly>
+                        </frame>
+                        <frame duration="1" hotspotX="0.5" hotspotY="0.533333" original-source="D:\Proyectos personales\ASSETS PARA ALFAS DE JUEGOS O PROTOTIPOS\Space Shooter\PNG\Meteors\meteorGrey_tiny2.png">
+                            <collision-poly>
+                                <point x="0.476563" y="0" />
+                                <point x="1" y="0.291667" />
+                                <point x="0.671875" y="1" />
+                                <point x="0" y="0.508334" />
+                            </collision-poly>
+                        </frame>
+                    </animation>
+                </animation-folder>
+            </object-type>
+            <object-type name="obj_player" sid="9491444395170468">
+                <plugin id="Sprite" />
+                <behaviors>
+                    <behavior-type name="Wrap" sid="3000153010707409">
+                        <behavior id="wrap" />
+                    </behavior-type>
+                    <behavior-type name="Flash" sid="1017767289266329">
+                        <behavior id="Flash" />
+                    </behavior-type>
+                    <behavior-type name="CustomMovement" sid="7607664889998692">
+                        <behavior id="custom" />
+                    </behavior-type>
+                </behaviors>
+                <animation-folder>
+                    <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="9979462913642769" speed="5">
+                        <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Proyectos personales\ASSETS PARA ALFAS DE JUEGOS O PROTOTIPOS\Space Shooter\PNG\playerShip3_blue.png">
+                            <image-point name="Bullet" x="1" y="0.5" />
+                            <collision-poly>
+                                <point x="0.833333" y="0.5" />
+                                <point x="0.291667" y="0.6875" />
+                                <point x="0.291667" y="0.3125" />
+                            </collision-poly>
+                        </frame>
+                    </animation>
+                </animation-folder>
+            </object-type>
+            <object-type name="obj_shield" sid="2179566079055889">
+                <plugin id="Sprite" />
+                <behaviors>
+                    <behavior-type name="Solid" sid="3283841672309589">
+                        <behavior id="solid" />
+                    </behavior-type>
+                </behaviors>
+                <animation-folder>
+                    <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="7959496816213755" speed="5">
+                        <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Proyectos personales y  Game design\Elementos gratuitos - Assets - Iconos - musica\ASSETS PARA ALFAS DE JUEGOS O PROTOTIPOS\Onscreen controls (400 assets)\Sprites\transparentLight\transparentLight09.png">
+                            <collision-poly>
+                                <point x="0.15" y="0.15" />
+                                <point x="0.5" y="0.00625" />
+                                <point x="0.85" y="0.15" />
+                                <point x="1" y="0.5" />
+                                <point x="0.85" y="0.85" />
+                                <point x="0.5" y="1" />
+                                <point x="0.15" y="0.85" />
+                                <point x="0" y="0.5" />
+                            </collision-poly>
+                        </frame>
+                    </animation>
+                </animation-folder>
+            </object-type>
+            <object-type name="hud_accelerate" sid="978072925303033">
+                <plugin id="Sprite" />
+                <animation-folder>
+                    <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="4066282387657273" speed="5">
+                        <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Proyectos personales y  Game design\Elementos gratuitos - Assets - Iconos - musica\ASSETS PARA ALFAS DE JUEGOS O PROTOTIPOS\Onscreen controls (400 assets)\Sprites\lineLight\lineLight47.png" />
+                    </animation>
+                </animation-folder>
+            </object-type>
+            <object-type name="hud_brake" sid="7087335922434123">
+                <plugin id="Sprite" />
+                <animation-folder>
+                    <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="557058416529384" speed="5">
+                        <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Proyectos personales y  Game design\Elementos gratuitos - Assets - Iconos - musica\ASSETS PARA ALFAS DE JUEGOS O PROTOTIPOS\Onscreen controls (400 assets)\Sprites\lineLight\lineLight48.png" />
+                    </animation>
+                </animation-folder>
+            </object-type>
+            <object-type name="hud_shoot" sid="7566452172482382">
+                <plugin id="Sprite" />
+                <animation-folder>
+                    <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="9076159296043355" speed="5">
+                        <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Proyectos personales y  Game design\Elementos gratuitos - Assets - Iconos - musica\ASSETS PARA ALFAS DE JUEGOS O PROTOTIPOS\Onscreen controls (400 assets)\Sprites\lineLight\lineLight46.png" />
+                    </animation>
+                </animation-folder>
+            </object-type>
+            <object-type name="hud_turn_ship" sid="4090455681945493">
+                <plugin id="Sprite" />
+                <animation-folder>
+                    <animation framecount="2" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="695476474058661" speed="0">
+                        <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="D:\Proyectos personales y  Game design\Elementos gratuitos - Assets - Iconos - musica\ASSETS PARA ALFAS DE JUEGOS O PROTOTIPOS\Onscreen controls (400 assets)\Sprites\lineLight\lineLight43.png" />
+                        <frame duration="1" hotspotX="0.5" hotspotY="0.5" />
+                    </animation>
+                </animation-folder>
+            </object-type>
+        </object-folder>
+        <object-folder name="Texts">
+            <object-type name="TXT_Life" sid="2534739954036672">
+                <plugin id="Text" />
+            </object-type>
+            <object-type name="TXT_Result" sid="4258998153390177">
+                <plugin id="Text" />
+            </object-type>
+            <object-type name="TXT_Score" sid="3847282604533721">
+                <plugin id="Text" />
+            </object-type>
+        </object-folder>
+        <object-type name="tb_space" sid="6100544105967429">
+            <plugin id="TiledBg" />
+            <texture original-source="D:\Proyectos personales y  Game design\Elementos gratuitos - Assets - Iconos - musica\ASSETS PARA ALFAS DE JUEGOS O PROTOTIPOS\Space Shooter\Backgrounds\purple.png" />
+        </object-type>
+    </object-folder>
+    <families />
+    <layout-folder>
+        <layout>TitleScreen.xml</layout>
+        <layout>Game.xml</layout>
+        <layout>Credits.xml</layout>
+    </layout-folder>
+    <event-folder>
+        <event-sheet>Event_2_Game.xml</event-sheet>
+        <event-sheet>Event_1_Menu.xml</event-sheet>
+    </event-folder>
+    <global-instances>
+        <global-instance type="Keyboard" uid="3" />
+        <global-instance type="Function" uid="6" />
+        <global-instance type="Audio" uid="9">
+            <properties>
+                <timescale-audio>Off</timescale-audio>
+                <saveload>All</saveload>
+                <play-in-background>No</play-in-background>
+                <positioned-audio></positioned-audio>
+                <panning-model>HRTF</panning-model>
+                <distance-model>Inverse</distance-model>
+                <listener-z-height>600</listener-z-height>
+                <reference-distance>600</reference-distance>
+                <maximum-distance>10000</maximum-distance>
+                <roll-off-factor>1</roll-off-factor>
+            </properties>
+        </global-instance>
+        <global-instance type="Browser" uid="14" />
+        <global-instance type="Touch" uid="32">
+            <properties>
+                <use-mouse-input>Yes</use-mouse-input>
+            </properties>
+        </global-instance>
+    </global-instances>
+    <sounds-folder>
+        <file name="blip.m4a" />
+        <file name="blip.ogg" />
+        <file name="boom.m4a" />
+        <file name="boom.ogg" />
+        <file name="hurt.m4a" />
+        <file name="hurt.ogg" />
+        <file name="lose.m4a" />
+        <file name="lose.ogg" />
+        <file name="shoot.m4a" />
+        <file name="shoot.ogg" />
+        <file name="win.m4a" />
+        <file name="win.ogg" />
+        <file name="fire.m4a" />
+        <file name="fire.ogg" />
+    </sounds-folder>
+    <music-folder />
+    <files-folder>
+        <file-folder name="Icons">
+            <file name="icon-16.png" />
+            <file name="icon-32.png" />
+            <file name="icon-114.png" />
+            <file name="icon-128.png" />
+            <file name="icon-256.png" />
+            <file name="loading-logo.png" />
+        </file-folder>
+    </files-folder>
+</c2project>
