@@ -11,6 +11,7 @@ For learning Bevy.
 * Add scoring system
     * Incentivize close-calls. Closer to asteroid gives higher points.
         * Similar to Undertale's battle mechanics.
+* Add bgm and sounds.
 * Add scrap system (money)
     * Upgrade
         * Laser attributes.

@@ -2,6 +2,8 @@ use bevy::prelude::*;
 
 use crate::{make_unit_struct_random, velocity::Velocity};
 
+pub const BG_SPRITE_X: f32 = 256.0;
+pub const BG_SPRITE_Y: f32 = 256.0;
 pub const BOUNDS: Vec2 = Vec2::new(1200.0, 640.0);
 // origin is center so divide by 2.
 // -------
