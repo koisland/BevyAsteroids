@@ -1,6 +1,13 @@
 use bevy::prelude::*;
 
-use crate::{asteroid::Asteroid, bullet::Bullet, player::Player, position::Position};
+use crate::{
+    asteroid::{Asteroid, AsteroidImages, AsteroidSize, ASTEROID_SPLIT_NUM, ASTEROID_VELOCITY},
+    bullet::Bullet,
+    player::Player,
+    position::Position,
+    velocity::Velocity,
+    GetRandom,
+};
 
 pub fn detect_asteroid_ship_collisions(
     mut commands: Commands,
@@ -27,6 +34,7 @@ pub fn detect_asteroid_ship_collisions(
 
 pub fn detect_asteroid_bullet_collisions(
     mut commands: Commands,
+    asteroid_images: Res<AsteroidImages>,
     mut bullet_query: Query<(Entity, &Transform, &Bullet, &Position), With<Bullet>>,
     mut asteroid_query: Query<(Entity, &Asteroid, &Position), With<Asteroid>>,
 ) {
@@ -37,7 +45,38 @@ pub fn detect_asteroid_bullet_collisions(
             let dst = (bullet_pos.0 - asteroid_pos.0).length();
 
             if dst < bullet_size + asteroid_size {
+                // TODO: Cause damage to asteroid?
                 commands.entity(bullet_entity).despawn();
+
+                // Get smaller sized asteroid and spawn more if possible.
+                // Smaller asteroids go in random direction.
+                // Otherwise, despawn smallest.
+                if let Some(new_asteroid_size) = usize::from(asteroid.size)
+                    .checked_sub(1)
+                    .map(AsteroidSize::from)
+                {
+                    let asteroid_img_handle = asteroid_images[&new_asteroid_size].clone();
+                    for _ in 0..ASTEROID_SPLIT_NUM {
+                        commands.spawn((
+                            Asteroid {
+                                size: new_asteroid_size,
+                            },
+                            SpriteBundle {
+                                texture: asteroid_img_handle.clone(),
+                                // Translation of 1.0 keeps asteroid over ship.
+                                transform: Transform::default().with_translation(Vec3::new(
+                                    asteroid_pos.x,
+                                    asteroid_pos.y,
+                                    1.0,
+                                )),
+                                ..default()
+                            },
+                            Velocity(Velocity::random().normalize() * ASTEROID_VELOCITY),
+                            Position(**asteroid_pos),
+                        ));
+                    }
+                }
+
                 commands.entity(asteroid_entity).despawn();
             }
         }

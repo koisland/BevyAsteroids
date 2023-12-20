@@ -10,7 +10,7 @@ pub mod velocity;
 use asteroid::setup_asteroids;
 use bullet::{remove_bullets, BulletImage};
 use collision::{detect_asteroid_bullet_collisions, detect_asteroid_ship_collisions};
-use player::{player_movement_system, Player};
+use player::{move_player, Player};
 use position::{sync_transform_w_position, update_positions, Position};
 use velocity::Velocity;
 
@@ -23,7 +23,7 @@ fn main() {
         .add_systems(
             FixedUpdate,
             (
-                player_movement_system,
+                move_player,
                 remove_bullets,
                 detect_asteroid_ship_collisions,
                 detect_asteroid_bullet_collisions,

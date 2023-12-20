@@ -1,7 +1,7 @@
 use std::{collections::HashMap, path::PathBuf};
 
 use bevy::prelude::*;
-use strum::IntoEnumIterator;
+use strum::{EnumCount, IntoEnumIterator};
 use strum_macros::EnumIter;
 
 use crate::{
@@ -10,12 +10,13 @@ use crate::{
     GetRandom,
 };
 
-const ASTEROID_NUM: usize = 6;
-const ASTEROID_VELOCITY: f32 = 1.0;
+const ASTEROID_NUM: usize = 12;
+pub const ASTEROID_SPLIT_NUM: usize = 2;
+pub const ASTEROID_VELOCITY: f32 = 1.0;
 
 const ASTEROID_IMG_DIR: &str = "Animations/obj_asteroid/Default/";
 
-#[derive(EnumIter, Default, PartialEq, Eq, Hash)]
+#[derive(EnumIter, EnumCount, Default, PartialEq, Eq, Hash, Clone, Copy)]
 pub enum AsteroidSize {
     #[default]
     Large,
@@ -24,7 +25,7 @@ pub enum AsteroidSize {
     Tiny,
 }
 
-#[derive(Default, Component)]
+#[derive(Default, Component, Clone)]
 pub struct Asteroid {
     /// Asteroid size.
     pub size: AsteroidSize,
@@ -37,6 +38,29 @@ impl AsteroidSize {
             AsteroidSize::Medium => 35.0,
             AsteroidSize::Small => 15.0,
             AsteroidSize::Tiny => 7.5,
+        }
+    }
+}
+
+impl From<AsteroidSize> for usize {
+    fn from(value: AsteroidSize) -> Self {
+        match value {
+            AsteroidSize::Large => 3,
+            AsteroidSize::Medium => 2,
+            AsteroidSize::Small => 1,
+            AsteroidSize::Tiny => 0,
+        }
+    }
+}
+
+impl From<usize> for AsteroidSize {
+    fn from(value: usize) -> Self {
+        match value.clamp(0, AsteroidSize::COUNT - 1) {
+            3 => AsteroidSize::Large,
+            2 => AsteroidSize::Medium,
+            1 => AsteroidSize::Small,
+            0 => AsteroidSize::Tiny,
+            _ => unreachable!(),
         }
     }
 }

@@ -26,8 +26,7 @@ impl Player {
     }
 }
 
-/// Demonstrates applying rotation and movement based on keyboard input.
-pub fn player_movement_system(
+pub fn move_player(
     keyboard_input: Res<Input<KeyCode>>,
     bullet_image: Res<BulletImage>,
     mut commands: Commands,
