@@ -5,6 +5,7 @@ pub mod bullet;
 pub mod collision;
 pub mod player;
 pub mod position;
+pub mod ui;
 pub mod velocity;
 
 use asteroid::setup_asteroids;
@@ -12,17 +13,18 @@ use bullet::{remove_bullets, BulletImage};
 use collision::{detect_asteroid_bullet_collisions, detect_asteroid_ship_collisions};
 use player::{move_player, Player};
 use position::{
-    sync_transform_w_position, update_positions, Position, BG_SPRITE_X, BOUNDS_MAX_X, BOUNDS_MAX_Y,
-    BOUNDS_MIN_X, BOUNDS_MIN_Y,
+    sync_transform_w_position, update_positions, Position, BG_SPRITE_X, BG_SPRITE_Y, BOUNDS_MAX_X,
+    BOUNDS_MAX_Y, BOUNDS_MIN_X, BOUNDS_MIN_Y,
 };
+use ui::UIPlugin;
 use velocity::Velocity;
-
-use crate::position::BG_SPRITE_Y;
 
 fn main() {
     App::new()
         .add_plugins(DefaultPlugins)
+        .add_plugins(UIPlugin)
         .insert_resource(Time::<Fixed>::from_hz(60.0))
+        // TODO: Separate into Plugins
         .add_systems(Startup, (setup, setup_asteroids))
         .add_systems(FixedUpdate, (update_positions, sync_transform_w_position))
         .add_systems(

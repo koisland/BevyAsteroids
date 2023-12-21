@@ -35,9 +35,13 @@ pub fn detect_asteroid_ship_collisions(
 pub fn detect_asteroid_bullet_collisions(
     mut commands: Commands,
     asteroid_images: Res<AsteroidImages>,
+    mut player_query: Query<&mut Player, With<Player>>,
     mut bullet_query: Query<(Entity, &Transform, &Bullet, &Position), With<Bullet>>,
     mut asteroid_query: Query<(Entity, &Asteroid, &Position), With<Asteroid>>,
 ) {
+    let Ok(mut player) = player_query.get_single_mut() else {
+        return;
+    };
     for (bullet_entity, bullet_transform, _bullet, bullet_pos) in &mut bullet_query {
         let bullet_size = bullet_transform.scale.max_element();
         for (asteroid_entity, asteroid, asteroid_pos) in &mut asteroid_query {
@@ -78,6 +82,9 @@ pub fn detect_asteroid_bullet_collisions(
                 }
 
                 commands.entity(asteroid_entity).despawn();
+
+                // Each destroyed asteroid provides 1 pt.
+                player.score += 1
             }
         }
     }

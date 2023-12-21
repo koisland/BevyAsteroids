@@ -16,7 +16,8 @@ const SHIP_MAX_VELOCITY: f32 = 10.0;
 /// player component
 #[derive(Default, Component)]
 pub struct Player {
-    rotation_angle: f32,
+    pub rotation_angle: f32,
+    pub score: usize,
 }
 
 impl Player {
