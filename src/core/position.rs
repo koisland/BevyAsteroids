@@ -1,6 +1,7 @@
 use bevy::prelude::*;
 
-use crate::{make_unit_struct_random, velocity::Velocity};
+use super::velocity::Velocity;
+use crate::make_unit_struct_random;
 
 pub const BG_SPRITE_X: f32 = 256.0;
 pub const BG_SPRITE_Y: f32 = 256.0;

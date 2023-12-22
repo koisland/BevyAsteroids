@@ -1,6 +1,6 @@
 use bevy::prelude::*;
 
-use crate::player::Player;
+use crate::core::player::Player;
 
 // Move to src/ui?
 #[derive(Component)]

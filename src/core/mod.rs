@@ -1,14 +1,21 @@
 use bevy::prelude::*;
 
-use crate::asteroid::setup_asteroids;
-use crate::bullet::{remove_bullets, BulletImage};
-use crate::collision::{detect_asteroid_bullet_collisions, detect_asteroid_ship_collisions};
-use crate::player::{move_player, Player};
-use crate::position::{
+pub mod asteroid;
+pub mod bullet;
+pub mod collision;
+pub mod player;
+pub mod position;
+pub mod velocity;
+
+use asteroid::setup_asteroids;
+use bullet::{remove_bullets, BulletImage};
+use collision::{detect_asteroid_bullet_collisions, detect_asteroid_ship_collisions};
+use player::{move_player, Player};
+use position::{
     sync_transform_w_position, update_positions, Position, BG_SPRITE_X, BG_SPRITE_Y, BOUNDS_MAX_X,
     BOUNDS_MAX_Y, BOUNDS_MIN_X, BOUNDS_MIN_Y,
 };
-use crate::velocity::Velocity;
+use velocity::Velocity;
 
 pub struct GamePlugin;
 

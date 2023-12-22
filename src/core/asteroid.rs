@@ -4,11 +4,11 @@ use bevy::prelude::*;
 use strum::{EnumCount, IntoEnumIterator};
 use strum_macros::EnumIter;
 
-use crate::{
+use super::{
     position::{Position, BOUNDS},
     velocity::Velocity,
-    GetRandom,
 };
+use crate::GetRandom;
 
 const ASTEROID_NUM: usize = 12;
 pub const ASTEROID_SPLIT_NUM: usize = 2;

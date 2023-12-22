@@ -1,13 +1,7 @@
 use bevy::prelude::*;
 
-pub mod asteroid;
-pub mod bullet;
-pub mod collision;
 pub mod core;
-pub mod player;
-pub mod position;
 pub mod ui;
-pub mod velocity;
 
 use core::GamePlugin;
 use ui::UIPlugin;

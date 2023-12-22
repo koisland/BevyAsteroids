@@ -1,6 +1,6 @@
 use bevy::prelude::*;
 
-use crate::position::Position;
+use super::position::Position;
 
 pub const BULLET_VELOCITY: f32 = 8.0;
 pub const BULLET_MAX_DISTANCE: f32 = 20000.0;

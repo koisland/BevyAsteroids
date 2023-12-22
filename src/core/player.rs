@@ -2,7 +2,7 @@ use std::f32::consts::PI;
 
 use bevy::prelude::*;
 
-use crate::{
+use super::{
     bullet::{Bullet, BulletImage, BULLET_VELOCITY},
     position::Position,
     velocity::Velocity,

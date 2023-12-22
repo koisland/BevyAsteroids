@@ -1,13 +1,13 @@
 use bevy::prelude::*;
 
-use crate::{
+use super::{
     asteroid::{Asteroid, AsteroidImages, AsteroidSize, ASTEROID_SPLIT_NUM, ASTEROID_VELOCITY},
     bullet::Bullet,
     player::Player,
     position::Position,
     velocity::Velocity,
-    GetRandom,
 };
+use crate::GetRandom;
 
 pub fn detect_asteroid_ship_collisions(
     mut commands: Commands,
