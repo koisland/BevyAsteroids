@@ -37,9 +37,9 @@ pub fn update_score_text(
     player_query: Query<&mut Player>,
     mut text_query: Query<&mut Text, With<ScoreText>>,
 ) {
-    let Ok(player) = player_query.get_single() else {
+    let (Ok(player), Ok(mut score_text)) = (player_query.get_single(), text_query.get_single_mut())
+    else {
         return;
     };
-    let mut score_text = text_query.single_mut();
     score_text.sections[1].value = format!("{:.2}", player.score)
 }

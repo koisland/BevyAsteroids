@@ -17,13 +17,28 @@ use position::{
 };
 use velocity::Velocity;
 
+use self::collision::cleanup_game_entities;
+
 pub struct GamePlugin;
+
+#[derive(Debug, Clone, Copy, Default, Eq, PartialEq, Hash, States)]
+pub enum AppState {
+    #[default]
+    Menu,
+    InGame,
+    GameOver,
+}
 
 impl Plugin for GamePlugin {
     fn build(&self, app: &mut App) {
         app.insert_resource(Time::<Fixed>::from_hz(60.0))
-            .add_systems(Startup, (setup, setup_asteroids))
-            .add_systems(FixedUpdate, (update_positions, sync_transform_w_position))
+            .add_state::<AppState>()
+            .add_systems(Startup, setup_camera)
+            .add_systems(OnEnter(AppState::InGame), (setup, setup_asteroids))
+            .add_systems(
+                FixedUpdate,
+                (update_positions, sync_transform_w_position).run_if(in_state(AppState::InGame)),
+            )
             .add_systems(
                 FixedUpdate,
                 (
@@ -31,17 +46,22 @@ impl Plugin for GamePlugin {
                     remove_bullets,
                     detect_asteroid_ship_collisions,
                     detect_asteroid_bullet_collisions,
-                ),
-            );
+                )
+                    .run_if(in_state(AppState::InGame)),
+            )
+            .add_systems(OnExit(AppState::InGame), cleanup_game_entities);
     }
+}
+
+fn setup_camera(mut commands: Commands) {
+    // 2D orthographic camera
+    commands.spawn(Camera2dBundle::default());
 }
 
 fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
     let ship_handle = asset_server.load("Animations/obj_player/Default/000.png");
     let bullet_handle = asset_server.load("Animations/obj_bullet/Default/000.png");
     let space_bg_handle = asset_server.load("Textures/tb_space.png");
-    // 2D orthographic camera
-    commands.spawn(Camera2dBundle::default());
 
     // Spawn background texture across entire screen bounds.
     let mut x_bg_pos = BOUNDS_MIN_X - BG_SPRITE_X;
