@@ -21,7 +21,7 @@ pub trait GetRandom {
 }
 
 #[macro_export]
-macro_rules! make_unit_struct_random {
+macro_rules! make_vec2_struct_random {
     ($name:ident) => {
         use $crate::GetRandom;
 

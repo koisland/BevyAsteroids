@@ -1,7 +1,7 @@
 use bevy::prelude::*;
 
 use super::velocity::Velocity;
-use crate::make_unit_struct_random;
+use crate::make_vec2_struct_random;
 
 pub const BG_SPRITE_X: f32 = 256.0;
 pub const BG_SPRITE_Y: f32 = 256.0;
@@ -51,4 +51,4 @@ pub fn sync_transform_w_position(mut query: Query<(&mut Transform, &Position)>) 
     }
 }
 
-make_unit_struct_random!(Position);
+make_vec2_struct_random!(Position);
