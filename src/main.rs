@@ -1,6 +1,6 @@
 #![allow(clippy::type_complexity)]
 
-use bevy::prelude::*;
+use bevy::{prelude::*, window::EnabledButtons};
 
 pub mod core;
 pub mod ui;
@@ -10,7 +10,19 @@ use ui::UIPlugin;
 
 fn main() {
     App::new()
-        .add_plugins(DefaultPlugins)
+        .add_plugins(DefaultPlugins::build(DefaultPlugins).set(WindowPlugin {
+            // Disallow resizing window.
+            primary_window: Some(Window {
+                resizable: false,
+                enabled_buttons: EnabledButtons {
+                    minimize: true,
+                    maximize: false,
+                    close: true,
+                },
+                ..default()
+            }),
+            ..default()
+        }))
         .add_plugins(UIPlugin)
         .add_plugins(GamePlugin)
         .run();

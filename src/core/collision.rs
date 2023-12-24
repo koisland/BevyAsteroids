@@ -97,11 +97,15 @@ pub fn detect_asteroid_bullet_collisions(
 pub fn cleanup_game_entities(
     mut commands: Commands,
     ship_query: Query<Entity, With<Player>>,
+    bullet_query: Query<Entity, With<Bullet>>,
     asteroid_query: Query<Entity, With<Asteroid>>,
 ) {
-    // Despawn player and asteroids.
+    // Despawn player, bullets, and asteroids.
     commands.entity(ship_query.single()).despawn();
     for asteroid_entity in &asteroid_query {
         commands.entity(asteroid_entity).despawn()
+    }
+    for bullet_entity in &bullet_query {
+        commands.entity(bullet_entity).despawn()
     }
 }

@@ -22,6 +22,7 @@ pub struct Player {
 
 impl Player {
     fn direction(&self) -> Vec2 {
+        // https://en.wikipedia.org/wiki/Trigonometric_functions
         let (y, x) = (self.rotation_angle + (PI / 2.0)).sin_cos();
         Vec2::new(x, y)
     }

@@ -7,12 +7,8 @@ use crate::core::AppState;
 pub struct OnMainMenuScreen;
 
 #[derive(Component)]
-struct OnSettingsScreen;
-
-#[derive(Component)]
 pub enum MenuButtonAction {
     Play,
-    Settings,
     Quit,
 }
 
@@ -20,7 +16,6 @@ pub enum MenuButtonAction {
 pub enum MenuState {
     #[default]
     Main,
-    Settings,
     Disabled,
 }
 
@@ -96,14 +91,6 @@ pub fn setup_menu(mut commands: Commands) {
                                 .spawn(TextBundle::from_section("Play", button_text_style.clone()));
                         });
                     parent
-                        .spawn((button_bundle_style.clone(), MenuButtonAction::Settings))
-                        .with_children(|parent| {
-                            parent.spawn(TextBundle::from_section(
-                                "Settings",
-                                button_text_style.clone(),
-                            ));
-                        });
-                    parent
                         .spawn((button_bundle_style.clone(), MenuButtonAction::Quit))
                         .with_children(|parent| {
                             parent
@@ -128,9 +115,6 @@ pub fn update_menu_game_state(
                 MenuButtonAction::Play => {
                     game_state.set(AppState::InGame);
                     menu_state.set(MenuState::Disabled);
-                }
-                MenuButtonAction::Settings => {
-                    todo!()
                 }
                 MenuButtonAction::Quit => app_exit_events.send(AppExit),
             }

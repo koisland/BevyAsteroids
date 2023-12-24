@@ -26,15 +26,21 @@ pub enum AppState {
     #[default]
     Menu,
     InGame,
-    GameOver,
+    Paused,
 }
 
 impl Plugin for GamePlugin {
     fn build(&self, app: &mut App) {
         app.insert_resource(Time::<Fixed>::from_hz(60.0))
             .add_state::<AppState>()
-            .add_systems(Startup, setup_camera)
-            .add_systems(OnEnter(AppState::InGame), (setup, setup_asteroids))
+            .add_systems(Startup, (setup_camera, setup_background))
+            .add_systems(
+                OnTransition {
+                    from: AppState::Menu,
+                    to: AppState::InGame,
+                },
+                (setup, setup_asteroids),
+            )
             .add_systems(
                 FixedUpdate,
                 (update_positions, sync_transform_w_position).run_if(in_state(AppState::InGame)),
@@ -49,7 +55,14 @@ impl Plugin for GamePlugin {
                 )
                     .run_if(in_state(AppState::InGame)),
             )
-            .add_systems(OnExit(AppState::InGame), cleanup_game_entities);
+            .add_systems(FixedUpdate, pause_continue_game)
+            .add_systems(
+                OnTransition {
+                    from: AppState::InGame,
+                    to: AppState::Menu,
+                },
+                cleanup_game_entities,
+            );
     }
 }
 
@@ -58,9 +71,7 @@ fn setup_camera(mut commands: Commands) {
     commands.spawn(Camera2dBundle::default());
 }
 
-fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
-    let ship_handle = asset_server.load("Animations/obj_player/Default/000.png");
-    let bullet_handle = asset_server.load("Animations/obj_bullet/Default/000.png");
+fn setup_background(mut commands: Commands, asset_server: Res<AssetServer>) {
     let space_bg_handle = asset_server.load("Textures/tb_space.png");
 
     // Spawn background texture across entire screen bounds.
@@ -81,6 +92,11 @@ fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
         }
         x_bg_pos += BG_SPRITE_X;
     }
+}
+
+fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
+    let ship_handle = asset_server.load("Animations/obj_player/Default/000.png");
+    let bullet_handle = asset_server.load("Animations/obj_bullet/Default/000.png");
 
     // player controlled ship
     commands.spawn((
@@ -94,4 +110,18 @@ fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
     ));
 
     commands.insert_resource(BulletImage(bullet_handle))
+}
+
+pub fn pause_continue_game(
+    keyboard_input: Res<Input<KeyCode>>,
+    app_state: Res<State<AppState>>,
+    mut game_state: ResMut<NextState<AppState>>,
+) {
+    if keyboard_input.just_pressed(KeyCode::Escape) {
+        match *app_state.get() {
+            AppState::InGame => game_state.set(AppState::Paused),
+            AppState::Paused => game_state.set(AppState::InGame),
+            _ => unreachable!(),
+        }
+    }
 }
