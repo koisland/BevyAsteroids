@@ -1,6 +1,8 @@
 # Asteroids Clone
 For learning Bevy.
 
+<img align="middle" src="docs/asteroids_clone_game.PNG" width="50%">
+
 ### Sources
 * Starting from https://bevyengine.org/examples/2D%20Rendering/rotation/.
 * Book https://bevy-cheatbook.github.io/introduction.html
