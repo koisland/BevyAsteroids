@@ -2,6 +2,7 @@ use bevy::prelude::*;
 
 use super::{
     asteroid::{Asteroid, AsteroidImages, AsteroidSize, ASTEROID_SPLIT_NUM, ASTEROID_VELOCITY},
+    audio::{AsteroidDestroyedAudio, LossAudio, ShipDestroyedAudio},
     bullet::Bullet,
     player::Player,
     position::Position,
@@ -11,8 +12,11 @@ use super::{
 use crate::{ui::menu::MenuState, GetRandom};
 
 pub fn detect_asteroid_ship_collisions(
+    mut commands: Commands,
     ship_query: Query<(&Transform, &Position), With<Player>>,
     asteroid_query: Query<(Entity, &Asteroid, &Position), With<Asteroid>>,
+    ship_destroyed_audio: Res<ShipDestroyedAudio>,
+    loss_audio: Res<LossAudio>,
     mut menu_state: ResMut<NextState<MenuState>>,
     mut game_state: ResMut<NextState<AppState>>,
 ) {
@@ -21,14 +25,22 @@ pub fn detect_asteroid_ship_collisions(
     };
 
     let ship_size = ship_transform.scale.max_element();
-
     for (_, asteroid, asteroid_pos) in &asteroid_query {
         let asteroid_size = asteroid.size.scale();
         let dst = (ship_pos.0 - asteroid_pos.0).length();
 
         // Assume hitbox is circle. When centers of objects collide.
-        // TODO: Add death screen and explosion or something.
         if dst < ship_size + asteroid_size {
+            // Play ship destroyed sound once and despawn entity.
+            commands.spawn(AudioBundle {
+                source: ship_destroyed_audio.0.clone(),
+                settings: PlaybackSettings::DESPAWN,
+            });
+            // Then play loss audio.
+            commands.spawn(AudioBundle {
+                source: loss_audio.0.clone(),
+                settings: PlaybackSettings::DESPAWN,
+            });
             menu_state.set(MenuState::Main);
             game_state.set(AppState::Menu);
             return;
@@ -39,6 +51,7 @@ pub fn detect_asteroid_ship_collisions(
 pub fn detect_asteroid_bullet_collisions(
     mut commands: Commands,
     asteroid_images: Res<AsteroidImages>,
+    asteroid_destroyed_audio: Res<AsteroidDestroyedAudio>,
     mut player_query: Query<&mut Player, With<Player>>,
     mut bullet_query: Query<(Entity, &Transform, &Bullet, &Position), With<Bullet>>,
     mut asteroid_query: Query<(Entity, &Asteroid, &Position), With<Asteroid>>,
@@ -86,7 +99,10 @@ pub fn detect_asteroid_bullet_collisions(
                 }
 
                 commands.entity(asteroid_entity).despawn();
-
+                commands.spawn(AudioBundle {
+                    source: asteroid_destroyed_audio.0.clone(),
+                    settings: PlaybackSettings::DESPAWN,
+                });
                 // Each destroyed asteroid provides 1 pt.
                 player.score += 1
             }

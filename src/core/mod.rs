@@ -1,6 +1,7 @@
 use bevy::prelude::*;
 
 pub mod asteroid;
+pub mod audio;
 pub mod bullet;
 pub mod collision;
 pub mod player;
@@ -17,7 +18,7 @@ use position::{
 };
 use velocity::Velocity;
 
-use self::collision::cleanup_game_entities;
+use self::{audio::setup_audio, collision::cleanup_game_entities};
 
 pub struct GamePlugin;
 
@@ -33,6 +34,7 @@ impl Plugin for GamePlugin {
     fn build(&self, app: &mut App) {
         app.insert_resource(Time::<Fixed>::from_hz(60.0))
             .add_state::<AppState>()
+            .add_systems(Startup, setup_audio)
             .add_systems(Startup, (setup_camera, setup_background))
             .add_systems(
                 OnTransition {

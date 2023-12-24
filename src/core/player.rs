@@ -3,6 +3,7 @@ use std::f32::consts::PI;
 use bevy::prelude::*;
 
 use super::{
+    audio::BulletFiredAudio,
     bullet::{Bullet, BulletImage, BULLET_VELOCITY},
     position::Position,
     velocity::Velocity,
@@ -31,6 +32,7 @@ impl Player {
 pub fn move_player(
     keyboard_input: Res<Input<KeyCode>>,
     bullet_image: Res<BulletImage>,
+    bullet_fired_audio: Res<BulletFiredAudio>,
     mut commands: Commands,
     mut query: Query<(&mut Player, &mut Position, &mut Velocity, &mut Transform)>,
 ) {
@@ -80,5 +82,9 @@ pub fn move_player(
             Velocity(ship.direction().normalize() * BULLET_VELOCITY),
             Position(**pos),
         ));
+        commands.spawn(AudioBundle {
+            source: bullet_fired_audio.0.clone(),
+            settings: PlaybackSettings::DESPAWN,
+        });
     }
 }
