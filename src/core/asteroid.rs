@@ -1,4 +1,4 @@
-use std::{collections::HashMap, path::PathBuf};
+use std::collections::HashMap;
 
 use bevy::prelude::*;
 use strum::{EnumCount, IntoEnumIterator};
@@ -14,9 +14,9 @@ const ASTEROID_NUM: usize = 12;
 pub const ASTEROID_SPLIT_NUM: usize = 2;
 pub const ASTEROID_VELOCITY: f32 = 1.0;
 
-const ASTEROID_IMG_DIR: &str = "Animations/obj_asteroid/Default/";
+const ASTEROID_IMG_DIR: &str = "embedded://Animations/obj_asteroid/Default";
 
-#[derive(EnumIter, EnumCount, Default, PartialEq, Eq, Hash, Clone, Copy)]
+#[derive(Debug, EnumIter, EnumCount, Default, PartialEq, Eq, Hash, Clone, Copy)]
 pub enum AsteroidSize {
     #[default]
     Large,
@@ -65,7 +65,7 @@ impl From<usize> for AsteroidSize {
     }
 }
 
-#[derive(Resource, Deref)]
+#[derive(Debug, Resource, Deref)]
 pub struct AsteroidImages(HashMap<AsteroidSize, Handle<Image>>);
 
 pub fn setup_asteroids(mut commands: Commands, asset_server: Res<AssetServer>) {
@@ -73,16 +73,18 @@ pub fn setup_asteroids(mut commands: Commands, asset_server: Res<AssetServer>) {
         AsteroidSize::iter()
             .enumerate()
             .map(|(i, size)| {
-                let path: PathBuf = [ASTEROID_IMG_DIR, &format!("00{i}.png")].iter().collect();
-                (size, asset_server.load(path))
+                (
+                    size,
+                    asset_server.load(format!("{ASTEROID_IMG_DIR}/00{i}.png")),
+                )
             })
             .collect(),
     );
     for _ in 0..ASTEROID_NUM {
         let mut pos = Position::random();
         // Within bounds of window.
-        pos.x = (pos.x * 2.0 - 1.0) * BOUNDS.x / 2.0;
-        pos.y = (pos.y * 2.0 - 1.0) * BOUNDS.y / 2.0;
+        pos.x *= BOUNDS.x;
+        pos.y *= BOUNDS.y;
 
         let asteroid_size = AsteroidSize::Large;
         let asteroid_img_handle = asteroid_images[&asteroid_size].clone();

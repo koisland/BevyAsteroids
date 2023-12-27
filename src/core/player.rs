@@ -88,3 +88,21 @@ pub fn move_player(
         });
     }
 }
+
+pub fn setup_player(mut commands: Commands, asset_server: Res<AssetServer>) {
+    let ship_handle = asset_server.load("embedded://Animations/obj_player/Default/000.png");
+    let bullet_handle = asset_server.load("embedded://Animations/obj_bullet/Default/000.png");
+
+    // player controlled ship
+    commands.spawn((
+        SpriteBundle {
+            texture: ship_handle,
+            ..default()
+        },
+        Player::default(),
+        Velocity(Vec2::default()),
+        Position::default(),
+    ));
+
+    commands.insert_resource(BulletImage(bullet_handle));
+}

@@ -9,16 +9,15 @@ pub mod position;
 pub mod velocity;
 
 use asteroid::setup_asteroids;
-use bullet::{remove_bullets, BulletImage};
+use bullet::remove_bullets;
 use collision::{detect_asteroid_bullet_collisions, detect_asteroid_ship_collisions};
-use player::{move_player, Player};
+use player::move_player;
 use position::{
-    sync_transform_w_position, update_positions, Position, BG_SPRITE_X, BG_SPRITE_Y, BOUNDS_MAX_X,
+    sync_transform_w_position, update_positions, BG_SPRITE_X, BG_SPRITE_Y, BOUNDS_MAX_X,
     BOUNDS_MAX_Y, BOUNDS_MIN_X, BOUNDS_MIN_Y,
 };
-use velocity::Velocity;
 
-use self::{audio::setup_audio, collision::cleanup_game_entities};
+use self::{audio::setup_audio, collision::cleanup_game_entities, player::setup_player};
 
 pub struct GamePlugin;
 
@@ -41,7 +40,7 @@ impl Plugin for GamePlugin {
                     from: AppState::Menu,
                     to: AppState::InGame,
                 },
-                (setup, setup_asteroids),
+                (setup_player, setup_asteroids),
             )
             .add_systems(
                 FixedUpdate,
@@ -74,7 +73,7 @@ fn setup_camera(mut commands: Commands) {
 }
 
 fn setup_background(mut commands: Commands, asset_server: Res<AssetServer>) {
-    let space_bg_handle = asset_server.load("Textures/tb_space.png");
+    let space_bg_handle = asset_server.load("embedded://Textures/tb_space.png");
 
     // Spawn background texture across entire screen bounds.
     let mut x_bg_pos = BOUNDS_MIN_X - BG_SPRITE_X;
@@ -94,24 +93,6 @@ fn setup_background(mut commands: Commands, asset_server: Res<AssetServer>) {
         }
         x_bg_pos += BG_SPRITE_X;
     }
-}
-
-fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
-    let ship_handle = asset_server.load("Animations/obj_player/Default/000.png");
-    let bullet_handle = asset_server.load("Animations/obj_bullet/Default/000.png");
-
-    // player controlled ship
-    commands.spawn((
-        SpriteBundle {
-            texture: ship_handle,
-            ..default()
-        },
-        Player::default(),
-        Velocity(Vec2::default()),
-        Position::default(),
-    ));
-
-    commands.insert_resource(BulletImage(bullet_handle))
 }
 
 pub fn pause_continue_game(

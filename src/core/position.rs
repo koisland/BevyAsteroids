@@ -18,7 +18,7 @@ pub const BOUNDS_MIN_X: f32 = -BOUNDS_MAX_X;
 pub const BOUNDS_MAX_Y: f32 = BOUNDS.y / 2.0;
 pub const BOUNDS_MIN_Y: f32 = -BOUNDS_MAX_Y;
 
-#[derive(Default, Component, Deref, DerefMut, Clone)]
+#[derive(Debug, Default, Component, Deref, DerefMut, Clone)]
 pub struct Position(pub Vec2);
 
 pub fn update_positions(mut query: Query<(&Velocity, &Transform, &mut Position)>) {
