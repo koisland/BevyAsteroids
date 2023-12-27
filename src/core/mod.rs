@@ -17,7 +17,11 @@ use position::{
     BOUNDS_MAX_Y, BOUNDS_MIN_X, BOUNDS_MIN_Y,
 };
 
-use self::{audio::setup_audio, collision::cleanup_game_entities, player::setup_player};
+use self::{
+    audio::setup_audio,
+    collision::{check_win_condition, cleanup_game_entities},
+    player::setup_player,
+};
 
 pub struct GamePlugin;
 
@@ -53,6 +57,7 @@ impl Plugin for GamePlugin {
                     remove_bullets,
                     detect_asteroid_ship_collisions,
                     detect_asteroid_bullet_collisions,
+                    check_win_condition,
                 )
                     .run_if(in_state(AppState::InGame)),
             )

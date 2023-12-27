@@ -17,7 +17,3 @@ For learning Bevy.
 * Borrowed stuff from https://github.com/rsaihe/zenith/tree/main
 * UI stuff learned from https://www.rustadventure.dev/2048-with-bevy-ecs/bevy-0.6/writing-a-plugin-to-handle-game-ui-using-bevys-built-in-ui-abstractions
 * BGM from [HoliznaCC0](https://freemusicarchive.org/music/holiznacc0/)'s [Gamer Soundtrack: Game BOI](https://freemusicarchive.org/music/holiznacc0/gamer-soundtrack-game-boi)
-
-
-### TODO:
-* Add win/loss screen and win audio.

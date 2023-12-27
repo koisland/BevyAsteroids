@@ -2,7 +2,7 @@ use bevy::prelude::*;
 
 use super::{
     asteroid::{Asteroid, AsteroidImages, AsteroidSize, ASTEROID_SPLIT_NUM, ASTEROID_VELOCITY},
-    audio::{AsteroidDestroyedAudio, LossAudio, ShipDestroyedAudio},
+    audio::{AsteroidDestroyedAudio, LossAudio, ShipDestroyedAudio, VictoryAudio},
     bullet::Bullet,
     player::Player,
     position::Position,
@@ -107,6 +107,24 @@ pub fn detect_asteroid_bullet_collisions(
                 player.score += 1
             }
         }
+    }
+}
+
+pub fn check_win_condition(
+    mut commands: Commands,
+    asteroid_query: Query<(Entity, &Asteroid), With<Asteroid>>,
+    victory_audio: Res<VictoryAudio>,
+    mut menu_state: ResMut<NextState<MenuState>>,
+    mut game_state: ResMut<NextState<AppState>>,
+) {
+    if asteroid_query.is_empty() {
+        // Then play loss audio.
+        commands.spawn(AudioBundle {
+            source: victory_audio.0.clone(),
+            settings: PlaybackSettings::DESPAWN,
+        });
+        menu_state.set(MenuState::Main);
+        game_state.set(AppState::Menu);
     }
 }
 
