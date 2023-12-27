@@ -3,11 +3,25 @@ For learning Bevy.
 
 <img align="middle" src="docs/asteroids_clone_game.PNG" width="50%">
 
+### Setup
+Clone repo.
+```bash
+git clone git@github.com:koisland/BevyAsteroids.git
+cd BevyAsteroids
+```
+
+Build executable.
+```bash
+cargo build --release
+./target/release/bevy_asteroids.exe
+```
+
 ### Controls
 * Space - Fire laser
 * Up - Accelerate
 * Left - Rotate left
 * Right - Rotate right
+* Esc - Pause game
 
 ### Sources
 * Starting from https://bevyengine.org/examples/2D%20Rendering/rotation/.
